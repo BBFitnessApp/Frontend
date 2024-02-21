@@ -1,0 +1,47 @@
+
+
+<ion-content [fullscreen]="true">
+<div class="content">
+  <div class="header">
+    <a><ion-icon name="person-outline"></ion-icon></a>
+  </div>
+  <div class="title">
+    <p>{{currentDate}}</p>
+    <h1>Übersicht</h1>
+  </div>
+  <div class="date-flex">
+    <button>Täglich</button>
+    <button>Wöchentlich</button>
+    <button>Monatlich</button>
+    <button>Jährlich</button>
+  </div>
+  <div class="container">
+    <section class="grid-container">
+      <div class="calories-card">
+        <div>
+          <h2>xxx Kalorien</h2>
+          <p>von xxx Kalorien</p>
+        </div>
+        <div>
+          <app-apex-gauge></app-apex-gauge>
+        </div>
+      </div>
+      <div  class="macros-card">
+        <app-apex-radialbarchart [color]="'#60C914'" [label]="'Proteine'"></app-apex-radialbarchart>
+      </div>
+      <div class="macros-card">
+        <app-apex-radialbarchart [color]="'#f0ae59'" [label]="'Fette'"></app-apex-radialbarchart>
+      </div>
+      <div class="macros-card">
+        <app-apex-radialbarchart [color]="'#ad1e0e'" [label]="'Carbs'"></app-apex-radialbarchart>
+      </div>
+      <div class="graph-card">
+        <app-apex-linechart></app-apex-linechart>
+      </div>
+    </section>
+  </div>
+  <div class="macros-button">
+    <button>Makros hinzufügen</button>
+  </div>
+</div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "bbfoodtracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

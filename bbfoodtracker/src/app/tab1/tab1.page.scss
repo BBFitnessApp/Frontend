@@ -1,0 +1,186 @@
+*{
+
+
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+      margin: 0;
+      padding: 0;
+}
+
+
+.content{
+
+    width: 100%;
+    height: 100%;
+}
+
+.title{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0px;
+    padding-left: 6vw;
+    padding-top: 0vh;
+    margin-bottom: 3vh;
+}
+
+.title p{
+
+    margin: 0px;
+    color: grey;
+    font-size: 15px;
+}
+
+.title h1{
+
+    font-size: 2rem;
+    margin: 0px;
+}
+
+.container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+
+.header{
+
+    display: flex;
+    justify-content: flex-end;
+    align-items:flex-end;
+    width: 100%;
+    height: 9vh;
+}
+
+ion-icon{
+
+    width: 6vw;
+    height: 6vh;
+}
+
+.header a{
+
+    margin: 0px 7vw;
+}
+
+.date-flex{
+    position: relative;
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 3vh;
+
+}
+
+.grid-container{
+
+    display: grid;
+    grid-template-columns: repeat(3,minmax(120px,1fr));
+    grid-auto-rows: 120px;
+    gap: 3vw ;
+
+}
+
+.date-flex button{
+
+    font-size: 13px;
+    border: 2px solid ;
+    border-color: transparent;
+    background-color: transparent;
+    border-radius: 8px;
+
+}
+
+.date-flex button:focus{
+
+   background-color: #2a2a33;
+   padding: 5px;
+   box-shadow: 0px 0px 8px #2a2a33;
+
+   
+}
+
+
+.calories-card{
+
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    background-color: #131317;
+
+
+}
+.calories-card h2{
+
+    font-size: 20px;
+}
+
+.calories-card p {
+
+    font-size: 13px;
+    color: grey;
+}
+
+.macros-card{
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph-card{
+
+    grid-column: 1 / 4;
+    grid-row: span 2 / auto;
+    border-radius: 15px;
+    background-color: #0a0a0d;
+    box-shadow: 0px 0px 7px #0a0a0d;
+
+}
+
+.macros-button{
+    position: absolute;
+    top: 89vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4vh;
+}
+
+.macros-button button{
+    width: 95%;
+    height: 100%;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #3880ff;
+
+}
+
+.macros-button button{
+
+    background-color: #3171e0;
+}
+
+
+#chart {
+    padding: 0;
+    max-width: 650px;
+    margin: 35px auto;
+   
+  }

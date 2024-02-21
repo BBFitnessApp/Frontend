@@ -1,0 +1,24 @@
+
+<ion-content [fullscreen]="true">
+
+  <div class="hero-text">
+    <h1>Lass uns nun dein Ziel festlegen</h1>
+  </div>
+  <div class="hero">
+  <div class="goals">
+    <p>Wähle das für dich wichtigste Ziel aus</p>
+    <button (focus)="onButtonFocus($event)">Muskelaufbau</button>
+    <button (focus)="onButtonFocus($event)">Gewichtsverlust</button>
+    <button (focus)="onButtonFocus($event)">Gewichtshaltung</button>
+  </div>
+  <div class="slider">
+    <h1>{{calories}}</h1>
+  <ion-range [min]="2000" [max]="5000"  (ionChange)="onIonChange($event)"></ion-range>
+  </div>
+  <div class="proceed">
+    <button (click)="collectGoal()">Fortfahren</button>
+  </div>
+  </div>
+
+
+</ion-content>
