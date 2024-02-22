@@ -7,10 +7,12 @@ import { ApexLinechartComponent } from '../charts/apex-linechart/apex-linechart.
 import { ApexGaugeComponent } from '../charts/apex-gauge/apex-gauge.component';
 
 
+
+
 @NgModule({
  imports:      [ CommonModule,NgApexchartsModule ],
- declarations: [ApexRadialbarchartComponent,ApexLinechartComponent,ApexGaugeComponent  ],
+ declarations: [ApexRadialbarchartComponent,ApexLinechartComponent,ApexGaugeComponent],
  exports:      [ 
-                 CommonModule, FormsModule, ApexRadialbarchartComponent,ApexLinechartComponent,ApexGaugeComponent ]
+                 CommonModule, FormsModule, ApexRadialbarchartComponent,ApexLinechartComponent,ApexGaugeComponent, ]
 })
 export class SharedModule { }

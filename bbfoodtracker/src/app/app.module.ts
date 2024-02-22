@@ -7,16 +7,17 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import config from '../../capacitor.config';
-import { LoginButtonComponent } from './components/login-button/login-button.component';
-import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { SharedModule } from './shared/shared.module';
 
 
 const redirect_uri = `${config.appId}://dev-3tdsdhc4kc6o1ti4.eu.auth0.com/capacitor/${config.appId}/callback`;
 
 
 @NgModule({
-  declarations: [AppComponent,LoginButtonComponent,LogoutButtonComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  AuthModule.forRoot({
+  declarations: [AppComponent,],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,  AuthModule.forRoot({
     domain: 'dev-3tdsdhc4kc6o1ti4.eu.auth0.com',
     clientId: 'I78KCPRNcOf0rFh98wiT5nSSeSq6QoaJ',
     useRefreshTokens: true,

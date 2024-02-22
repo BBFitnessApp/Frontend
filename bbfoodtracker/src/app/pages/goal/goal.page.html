@@ -16,7 +16,7 @@
   <ion-range [min]="2000" [max]="5000"  (ionChange)="onIonChange($event)"></ion-range>
   </div>
   <div class="proceed">
-    <button (click)="collectGoal()">Fortfahren</button>
+    <button [disabled]="specification == undefined" (click)="collectGoal()">Fortfahren</button>
   </div>
   </div>
 

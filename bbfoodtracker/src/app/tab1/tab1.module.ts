@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { SharedModule } from '../shared/shared.module';
+import { LoginButtonComponent } from '../components/login-button/login-button.component';
+import { LogoutButtonComponent } from '../components/logout-button/logout-button.component';
 
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
@@ -20,7 +22,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     
     
     
+    
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page,LoginButtonComponent,LogoutButtonComponent]
 })
 export class Tab1PageModule {}

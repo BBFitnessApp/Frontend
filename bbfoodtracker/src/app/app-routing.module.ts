@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'goal',
     loadChildren: () => import('./pages/goal/goal.module').then( m => m.GoalPageModule)
+  },
+  {
+    path: 'macros',
+    loadChildren: () => import('./pages/macros/macros.module').then( m => m.MacrosPageModule)
   }
 ];
 @NgModule({

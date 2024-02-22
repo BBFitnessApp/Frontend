@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from '@auth0/auth0-angular';
 
 
 @Component({
@@ -10,10 +13,10 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class OnboardingPage implements OnInit {
 
-  age: number | any;
   form: FormGroup | any;
+  logged: User | undefined;
 
-  constructor(private router: Router,private formBuilder: FormBuilder) { 
+  constructor(private router: Router,private formBuilder: FormBuilder,private userService: UserService,private authService: AuthService) { 
 
     this.form = formBuilder.group({
       age: ['',Validators.compose([Validators.min(10), Validators.max(100),Validators.required])],
@@ -22,6 +25,8 @@ export class OnboardingPage implements OnInit {
       gender:['',Validators.required]
 
     })
+
+    
   }
 
   ngOnInit() {
@@ -35,7 +40,40 @@ export class OnboardingPage implements OnInit {
 
   onSubmit(formData: any) {
     console.log(formData);
-    this.router.navigate(['/goal']);
+
+    let updatedAge: number = this.form.get('age').value
+    let updatedHeight: number = this.form.get('height').value
+    let updatedWeight: number = this.form.get('weight').value
+    let updatedGender: number = +this.form.get('gender').value
+
+
+   this.authService.user$.subscribe(userProfile => this.userService.getUserByEmail(userProfile?.email)?.subscribe({
+
+      next: data => {
+        const { id, email, userName, age, weight, gender, zielSpezifikation, bmi, height, kalorienziel } = data;
+
+        console.log(data.email);
+        this.logged = {id: data.id, userName: data.userName, email: data.email, password: data.password, age: updatedAge, height: updatedHeight, weight: updatedWeight, gender: updatedGender, zielSpezifikation: undefined, bmi: undefined, kalorienziel: undefined}
+      
+        console.log(this.logged)
+
+        this.userService.updateUser(this.logged).subscribe({
+          next: data => {
+
+            this.router.navigate(['../goal'])
+          },
+          error: err => {
+
+            console.log(err)
+          }
+        })
+
+      },
+      error: err => {
+        console.log(err);
+      }
+    }))
+
 
   }
 
