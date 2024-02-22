@@ -37,8 +37,8 @@
     <section class="grid-container">
       <div class="calories-card">
         <div>
-          <h2>xxx Kalorien</h2>
-          <p>von xxx Kalorien</p>
+          <h2>{{calories}}</h2>
+          <p>{{calorieGoal}}</p>
         </div>
         <div>
           <app-apex-gauge></app-apex-gauge>
@@ -59,7 +59,7 @@
     </section>
   </div>
   <div class="macros-button">
-    <button>Makros hinzufügen</button>
+    <button (click)="addMacro()">Makros hinzufügen</button>
   </div>
 </div>
 </ion-content>

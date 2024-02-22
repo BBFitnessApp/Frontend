@@ -1,9 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { delay, filter, take } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page implements OnInit {
 
+  calories: string = "";
+  calorieGoal: string = "";
   currentUser: string = "";
     daysOfWeek = [
     'Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'
@@ -39,17 +42,20 @@ export class Tab1Page implements OnInit {
 
   ngOnInit():void  {
     
+    this.authService.isAuthenticated$.subscribe(async isAuthenticated => {
+      if (isAuthenticated) {
+        await this.sendData();
+
+      }
+    });
+
    
     
   }
 
-  constructor(private authService: AuthService,private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService,private userService: UserService, private router: Router,private loadingCtrl: LoadingController) {
 
-    this.authService.isAuthenticated$.subscribe(isAuthenticated => {
-      if (isAuthenticated) {
-         this.sendData();
-      }
-    });
+    
 
 
 
@@ -66,55 +72,21 @@ export class Tab1Page implements OnInit {
 
     this.currentDate = dayOfWeek + ", " + dayNumber +". " + this.monthAbbreviations[currentMonthIndex]
   }
- 
-  sendData(){
+
+
+  async sendData(){
 
     let userName: string | any;
     let email : string | any;
     console.log("Bin drinnen")
 
-   /* this.authService.user$
-    .pipe(
-      delay(1000) // Delay for 1 second (adjust the time as needed)
-    )
-    .subscribe(user => {
-      if (user) {
-        userName = user.name;
-        email = user.email;
-        let logged : User = {userName: userName, email: email, id: undefined, password: undefined, weight: undefined, zielSpezifikation: undefined, age: undefined, gender: undefined, bmi: undefined, height: undefined, kalorienziel: undefined};
-
-        this.authService.user$.subscribe(userProfile => this.userService.getUserByEmail(userProfile?.email)?.subscribe({
-          next: data => {
-    
-           this.loggedUser = data;
-           console.log(this.loggedUser)
-           this.persisted = true;
-          },
-          error: err => {
-            this.persisted = false;
-    
-            console.log(this.persisted)
-    
-          }
-        }));
-        this.userService.postUser(logged).subscribe({
-          next: data => {
- 
-            console.log(data + "Success")
-          },
-          error: err => {
- 
-            console.log(err)
-          }
-        })
-
-        console.log(userName);
-      } else {
-        userName = ''; // User is not logged in, clear the userName
-      }
+    const loading = await this.loadingCtrl.create({
+      message:'Fetching data...'
     });
-     */
 
+    loading.present();
+
+  
     this.authService.user$.subscribe(userProfile => {
 
       if (userProfile){
@@ -123,8 +95,9 @@ export class Tab1Page implements OnInit {
           next: data => {
 
             this.loggedUser = data;
-            console.log(this.loggedUser)
-         
+            this.calorieGoal = "von " + this.loggedUser?.kalorienziel + " Kalorien"
+
+            loading.dismiss();
 
           },
           error: err =>{
@@ -140,11 +113,13 @@ export class Tab1Page implements OnInit {
                 next: data => {
     
                   console.log(data)
+                  loading.dismiss();
                   this.router.navigate(['../onboarding'])
                 },
                 error: err => {
     
                   console.log(err)
+                  loading.dismiss();
                 }
               })
             }
@@ -158,13 +133,13 @@ export class Tab1Page implements OnInit {
       }
     })
 
-   
+
 
   }
 
 
-  addUser(){
+  addMacro(){
 
-    
+        this.router.navigate(['../macros'])
   }
 }

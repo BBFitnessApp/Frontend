@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>macros</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">macros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+<ion-content >
+  <div class="hero">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+
+    <div class="hero-text">
+      <h1>Makros hinzufügen</h1>
+      <p>Gib deine Einnahmen ein, um sie in der Datenbank zu persistieren.</p>
+    </div>
+    <div class="modal">
+      <ion-item >
+        <ion-input  formControlName="calories" label="Kalorien" type="number" placeholder="Keine Angabe(kcal)" ></ion-input>
+     </ion-item>
+      <ion-item >
+       <ion-input formControlName="proteins"  label="Proteine" type="number" placeholder="Keine Angabe(g)" ></ion-input>
+      </ion-item>
+     <ion-item >
+      <ion-input  formControlName="fats" label="Fette" type="number" placeholder="Keine Angabe(g)" ></ion-input>
+     </ion-item>
+      <ion-item >
+        <ion-input  formControlName="carbs" label="Kohlenhydrate" type="number" placeholder="Keine Angabe(g)" ></ion-input>
+      </ion-item>
+     </div>
+      <div class="button">
+       <button  [disabled]="!form.valid" type="submit">Speichern</button>
+      </div>
+    </form>
+  </div>
 </ion-content>

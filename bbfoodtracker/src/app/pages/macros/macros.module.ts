@@ -8,12 +8,15 @@ import { MacrosPageRoutingModule } from './macros-routing.module';
 
 import { MacrosPage } from './macros.page';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MacrosPageRoutingModule
+    MacrosPageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [MacrosPage]
 })
