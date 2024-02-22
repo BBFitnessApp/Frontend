@@ -26,4 +26,21 @@ export class CalorieDataService {
 
     return this.http.post<CalorieData>(API_URL+'post',calorieData,httpOptions);
   }
+
+  getCalorieIntakeByDay(email: string){
+
+    const currentTime = new Date();
+    
+    if(email != undefined){
+      return this.http.get<CalorieData>(API_URL+'CalorieIntakeByToday',{
+         
+        params: new HttpParams({ fromObject: { email: email, date: currentTime.toString() } })
+      })
+
+    }
+
+    return null;
+ 
+  }
+  
 }

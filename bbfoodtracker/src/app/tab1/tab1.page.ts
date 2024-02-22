@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { delay, filter, take } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { CalorieDataService } from '../services/calorie-data.service';
 
 @Component({
   selector: 'app-tab1',
@@ -53,7 +54,7 @@ export class Tab1Page implements OnInit {
     
   }
 
-  constructor(private authService: AuthService,private userService: UserService, private router: Router,private loadingCtrl: LoadingController) {
+  constructor(private authService: AuthService,private userService: UserService, private router: Router,private loadingCtrl: LoadingController,private calorieDataService: CalorieDataService) {
 
     
 
@@ -96,6 +97,16 @@ export class Tab1Page implements OnInit {
 
             this.loggedUser = data;
             this.calorieGoal = "von " + this.loggedUser?.kalorienziel + " Kalorien"
+            this.calorieDataService.getCalorieIntakeByDay(this.loggedUser.email)?.subscribe({
+
+              next: data => {
+
+                this.calories= data + ' Kalorien'
+              },
+              error: err => {
+                console.log(err)
+              }
+            })
 
             loading.dismiss();
 
