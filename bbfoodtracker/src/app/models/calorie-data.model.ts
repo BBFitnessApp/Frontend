@@ -1,10 +1,10 @@
 export interface CalorieData {
 
     id: number | undefined,
-    userId: number,
+    userId: number | undefined,
     datum: Date,
-    kalorienaufnahme: number,
-    fette: number,
-    proteine: number,
-    kohlenhydrate: number
+    kalorienaufnahme: number | undefined,
+    fette: number | undefined,
+    proteine: number | undefined,
+    kohlenhydrate: number |undefined
 }

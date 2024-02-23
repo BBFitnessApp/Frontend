@@ -14,7 +14,12 @@ import { CalorieDataService } from '../services/calorie-data.service';
 })
 export class Tab1Page implements OnInit {
 
+  view: number = 0;
   calories: string = "";
+  proteins: number | any;
+  carbs: number | any;
+  fats: number | any;
+  caloriesNumber: number | any ;
   calorieGoal: string = "";
   currentUser: string = "";
     daysOfWeek = [
@@ -74,6 +79,13 @@ export class Tab1Page implements OnInit {
     this.currentDate = dayOfWeek + ", " + dayNumber +". " + this.monthAbbreviations[currentMonthIndex]
   }
 
+  changeView(button: number) {
+
+      
+      this.view = button;
+    
+    }
+
 
   async sendData(){
 
@@ -97,11 +109,48 @@ export class Tab1Page implements OnInit {
 
             this.loggedUser = data;
             this.calorieGoal = "von " + this.loggedUser?.kalorienziel + " Kalorien"
+            
+            this.calorieDataService.getCarbsIntakeByDay(this.loggedUser.email)?.subscribe({
+
+              next: data => {
+
+                  this.carbs = data;
+              },
+              error: err => {
+
+                console.log(err)
+              }
+            })
+
+            this.calorieDataService.getFatsIntakeByDay(this.loggedUser.email)?.subscribe({
+
+              next: data =>{
+
+                this.fats = data;
+              },
+              error: err => {
+
+                console.log(err)
+              }
+            })
+
+            this.calorieDataService.getProteinsIntakeByDay(this.loggedUser.email)?.subscribe({
+
+              next: data => {
+
+                this.proteins = data;
+              },
+              error: err =>{
+
+                  console.log(err)
+              }
+            })
             this.calorieDataService.getCalorieIntakeByDay(this.loggedUser.email)?.subscribe({
 
               next: data => {
 
-                this.calories= data + ' Kalorien'
+                this.calories= data + ' Kalorien';
+                this.caloriesNumber = data;
               },
               error: err => {
                 console.log(err)

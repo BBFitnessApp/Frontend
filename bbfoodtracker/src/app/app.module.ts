@@ -10,6 +10,8 @@ import config from '../../capacitor.config';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
+import { DateTransformServiceService } from './services/date-transform-service.service';
+import { DatePipe } from '@angular/common';
 
 
 const redirect_uri = `${config.appId}://dev-3tdsdhc4kc6o1ti4.eu.auth0.com/capacitor/${config.appId}/callback`;
@@ -27,7 +29,7 @@ const redirect_uri = `${config.appId}://dev-3tdsdhc4kc6o1ti4.eu.auth0.com/capaci
       
     }
   }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [DateTransformServiceService,DatePipe, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

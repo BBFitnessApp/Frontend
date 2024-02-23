@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
 import {
   ChartComponent,
@@ -28,12 +28,39 @@ export type ChartOptions = {
 })
 export class ApexLinechartComponent  implements OnInit {
 
+  @Input() button: number | any;
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
+  categories: string[] | any;
 
   constructor() { }
 
   ngOnInit() {
+
+    if(this.button == 0){
+
+      this.categories = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"]
+    }
+    else if(this.button == 1){
+
+      this.categories = ["Mon","Thu","Wed","Thur","Fri","Sat","Sun"]
+    }
+    else if(this.button == 2){
+
+      this.categories = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
+    }
+    else if(this.button == 3){
+
+      this.categories = ["Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep","Oct","Nov","Dec"]
+    }
 
     this.chartOptions = {
       series: [

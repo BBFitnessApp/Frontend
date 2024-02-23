@@ -4,9 +4,10 @@ import { User } from '../models/user.model';
 import { AuthService } from '@auth0/auth0-angular';
 import { mergeMap } from 'rxjs';
 import { CalorieData } from '../models/calorie-data.model';
+import { DateTransformServiceService } from './date-transform-service.service';
 
 
-const API_URL = 'https://localhost:5001/';
+const API_URL = 'https://localhost:5001/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,28 +20,61 @@ const httpOptions = {
 })
 export class CalorieDataService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService,private dateTransformService: DateTransformServiceService) { }
 
 
   postCalorieData(calorieData: CalorieData){
 
-    return this.http.post<CalorieData>(API_URL+'post',calorieData,httpOptions);
+    return this.http.post<CalorieData>(API_URL+'CalorieData/AddCalorieData',calorieData,httpOptions);
   }
 
   getCalorieIntakeByDay(email: string){
 
     const currentTime = new Date();
+    const transformedDate = this.dateTransformService.transformDate(currentTime);
     
     if(email != undefined){
-      return this.http.get<CalorieData>(API_URL+'CalorieIntakeByToday',{
-         
-        params: new HttpParams({ fromObject: { email: email, date: currentTime.toString() } })
-      })
+      return this.http.get<CalorieData>(API_URL+'CalorieData/CalorieIntakeByToday/'+email+'/'+transformedDate)
 
     }
 
     return null;
  
+  }
+
+  getProteinsIntakeByDay(email:string){
+
+    if(email != undefined){
+
+      return this.http.get<CalorieData>(API_URL+'CalorieData/ProteinIntakeByToday/'+email)
+    }
+
+    return null;
+  }
+
+  getFatsIntakeByDay(email: string){
+
+    
+
+
+    if(email != undefined){
+
+      return this.http.get<CalorieData>(API_URL+'CalorieData/FetteIntakeByToday/'+email)
+    }
+    return null;
+  }
+
+  getCarbsIntakeByDay(email: string){
+
+    const currentTime = new Date();
+    const transformedDate = this.dateTransformService.transformDate(currentTime);
+
+    if(email != undefined){
+
+      return this.http.get<CalorieData>(API_URL+'CalorieData/KohlenhydrateByDay/'+email+'/'+transformedDate)
+    }
+
+    return null;
   }
   
 }

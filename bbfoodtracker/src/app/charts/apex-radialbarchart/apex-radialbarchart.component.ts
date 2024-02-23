@@ -29,6 +29,7 @@ export class ApexRadialbarchartComponent  implements OnInit {
   public chartOptions: Partial<ChartOptions> | any;
   @Input() color = "";
   @Input() label = "";
+  @Input() data: number | any;
 
 
   constructor() { 
@@ -39,7 +40,7 @@ export class ApexRadialbarchartComponent  implements OnInit {
   ngOnInit() {
 
     this.chartOptions = {
-      series: [70],
+      series: [this.data],
       chart: {
         height: 150,
         type: "radialBar",

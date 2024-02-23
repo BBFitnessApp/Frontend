@@ -1,6 +1,31 @@
 
 
 <ion-content >
+  <ion-modal trigger="open-modal" [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
+   <ng-template >
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Abbrechen</ion-button>
+        </ion-buttons>
+        <ion-title>Barcode scannen</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Bestätigen</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+        <ion-input
+          label="Gib den Barcode ein"
+          labelPlacement="stacked"
+          type="text"
+          placeholder="keine Angabe"
+          [(ngModel)]="barcode"
+        ></ion-input>
+    </ion-content>
+   </ng-template>
+   
+  </ion-modal>
   <div class="hero">
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
 
@@ -24,6 +49,9 @@
      </div>
       <div class="button">
        <button  [disabled]="!form.valid" type="submit">Speichern</button>
+      </div>
+      <div class="icon">
+        <button id="open-modal"><ion-icon name="barcode-outline"></ion-icon></button>
       </div>
     </form>
   </div>

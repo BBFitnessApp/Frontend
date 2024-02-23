@@ -7,6 +7,7 @@ import {
   ApexFill,
   ChartComponent
 } from "ng-apexcharts";
+import { UserService } from "src/app/services/user.service";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -27,7 +28,7 @@ export class ApexGaugeComponent  implements OnInit {
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
 
-  constructor() { 
+  constructor(private userService: UserService) { 
     
     this.chartOptions = {
       series: [76],
