@@ -27,7 +27,7 @@ export class UserService {
 
     if(email != undefined){
 
-        return this.httpClient.get<User>(API_URL + 'getUserByEmail',{
+        return this.httpClient.get<User>(API_URL + 'getUserByEmail/getUserByEmail',{
          
           params: new HttpParams({ fromObject: { email: email } })
         })
@@ -41,14 +41,14 @@ export class UserService {
   postUser(user: User){
 
 
-    return this.httpClient.post<User>(API_URL,user,httpOptions);
+    return this.httpClient.post<User>(API_URL+'AddUser',user,httpOptions);
 
 
   }
 
   updateUser(user: User){
 
-    return this.httpClient.put<User>(API_URL + user.id,user,httpOptions)
+    return this.httpClient.put<User>(API_URL+'UpdateUser/' + user.id,user,httpOptions)
   }
 
 }
